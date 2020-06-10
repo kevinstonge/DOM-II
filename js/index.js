@@ -16,3 +16,13 @@ window.addEventListener('scroll',()=>{
           body.classList.remove("rainbowBG");
     }, 500);
 });
+//3. cursor tail
+let tailDiv = document.createElement("div");
+tailDiv.id = "tailDiv";
+tailDiv.innerText = "😃";
+tailDiv.style="position: absolute; top: 0; left: 0; font-size: 2rem;";
+document.querySelector("body").appendChild(tailDiv);
+window.addEventListener('mousemove',(e)=>{
+    tailDiv.style = `position: absolute; top: ${e.clientY+7}px; left: ${e.clientX+7}px; font-size: 2rem; z-index:100;`;
+    console.log(tailDiv.style);
+})
