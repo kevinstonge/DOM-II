@@ -23,6 +23,7 @@ tailDiv.innerText = "😃";
 tailDiv.style="position: absolute; top: 0; left: 0; font-size: 2rem;";
 document.querySelector("body").appendChild(tailDiv);
 window.addEventListener('mousemove',(e)=>{
-    tailDiv.style = `position: absolute; top: ${e.clientY+7}px; left: ${e.clientX+7}px; font-size: 2rem; z-index:100;`;
-    console.log(tailDiv.style);
+    tailDiv.style = `position: absolute; top: ${e.pageY+7}px; left: ${e.pageX+7}px; font-size: 2rem; z-index:100;`;
+    //to prevent the tail from 'drifting' when the page is scrolled, the previous line could be abstracted to a function that both scroll and mousemove can call
 })
+//4.
