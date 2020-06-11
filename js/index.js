@@ -1,4 +1,12 @@
-// Your code goes here
+//dom setup for some elements
+const tailDiv = document.createElement("div");
+tailDiv.id = "tailDiv";
+tailDiv.innerHTML = "😃";
+tailDiv.style="position: fixed; top: 0; left: 0; font-size: 2rem;";
+document.querySelector("body").appendChild(tailDiv);
+const body = document.querySelector("body");
+let images = document.querySelectorAll("img");
+images.forEach(image=>{image.style="-webkit-filter: blur(3px);transition:-webkit-filter 1s;"})
 
 //1. logo slideIn on load
 window.addEventListener('load',()=>{
@@ -6,8 +14,7 @@ window.addEventListener('load',()=>{
 })
 //2. rainbow bg on scroll
 let timer = null;
-window.addEventListener('scroll',()=>{
-    let body = document.querySelector("body");
+window.addEventListener('scroll',(e)=>{
     if (timer !== null) {
         body.classList.add("rainbowBG")
         clearTimeout(timer);        
@@ -17,13 +24,35 @@ window.addEventListener('scroll',()=>{
     }, 500);
 });
 //3. cursor tail
-let tailDiv = document.createElement("div");
-tailDiv.id = "tailDiv";
-tailDiv.innerText = "😃";
-tailDiv.style="position: absolute; top: 0; left: 0; font-size: 2rem;";
-document.querySelector("body").appendChild(tailDiv);
-window.addEventListener('mousemove',(e)=>{
-    tailDiv.style = `position: absolute; top: ${e.pageY+7}px; left: ${e.pageX+7}px; font-size: 2rem; z-index:100;`;
-    //to prevent the tail from 'drifting' when the page is scrolled, the previous line could be abstracted to a function that both scroll and mousemove can call
+function scrollEvent (pos) {
+    if (pos.y !== undefined && pos.x !== undefined) {
+        tailDiv.style = `position: fixed; top: ${pos.y+7}px; left: ${pos.x+7}px; font-size: 2rem; z-index:100;`;
+    }
+}
+window.addEventListener('wheel',(e)=>{scrollEvent({x: e.clientX,y: e.clientY})})
+
+window.addEventListener('mousemove',(e)=>{scrollEvent({x: e.clientX,y: e.clientY})})
+//4. parrot gif on mousedown button
+document.querySelectorAll(".btn").forEach(button=>{
+    button.addEventListener('mousedown',(e)=>{
+        tailDiv.innerHTML = `<img src="img/parrot.gif">`;
+    })
 })
-//4.
+//5. parrot gif removed on mouseup 
+window.addEventListener('mouseup',(e)=>{
+    tailDiv.innerHTML = "😃";
+})
+
+//6. unblur images on mouseover
+images.forEach(image=>image.addEventListener('mouseover',()=>image.style="-webkit-filter: blur(0px);transition:-webkit-filter 0.2s;"))
+
+//7. reblur images on mouseout
+images.forEach(image=>image.addEventListener('mouseout',()=>image.style="-webkit-filter: blur(3px);transition:-webkit-filter 1s;"))
+
+//8. sad face on blur
+window.addEventListener('blur',()=>{
+    tailDiv.innerHTML = "😭"
+})
+
+//9. replace happy face on focus
+window.addEventListener('focus',()=>{tailDiv.innerHTML="😃"})
