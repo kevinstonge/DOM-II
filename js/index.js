@@ -56,3 +56,5 @@ window.addEventListener('blur',()=>{
 
 //9. replace happy face on focus
 window.addEventListener('focus',()=>{tailDiv.innerHTML="😃"})
+
+//10.
