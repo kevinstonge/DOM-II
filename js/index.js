@@ -57,4 +57,13 @@ window.addEventListener('blur',()=>{
 //9. replace happy face on focus
 window.addEventListener('focus',()=>{tailDiv.innerHTML="😃"})
 
-//10.
+//10. console log div that was clicked (stopPropagation so div inside of .container doesn't trigger .container's event)
+document.querySelectorAll('.container').forEach(e=>e.addEventListener('click',(e)=>{
+    console.log('container clicked!');
+}));
+document.querySelectorAll('.container div').forEach(e=>e.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    console.log(`div inside of container clicked`);
+}));
+
+document.querySelectorAll('.nav-link').forEach(e=>e.addEventListener('click',(e)=>e.preventDefault()));
