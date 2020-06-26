@@ -1,3 +1,6 @@
+html {
+  background-color: #222;
+}
 body {
   display: flex;
   /*justify-content: center;*/
@@ -16,21 +19,21 @@ body {
 }
 
 .block--red {
-  background-color: red;
+  background-color: rgb(233, 80, 80);
 }
 
 .block--blue {
-  background-color: blue;
+  background-color: rgb(91, 91, 235);
 }
 
 .block--green {
-  background-color: green;
+  background-color: rgb(75, 223, 75);
 }
 
 .block--pink {
-  background-color: pink;
+  background-color: rgb(248, 157, 172);
 }
 
 .block--gray {
-  background-color: gray;
+  background-color: rgb(87, 87, 87);
 }
