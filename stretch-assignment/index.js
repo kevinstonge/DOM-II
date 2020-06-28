@@ -2,11 +2,10 @@ class Block {
     constructor(props) {
         this.el = props.el;
         this.pos = props.pos;
-        this.el.style = `order: ${this.pos};`;
+        this.el.style = `top: calc(${this.pos}*5rem + ${this.pos}*0.5rem); transition: top 1s;`;
         this.el.innerText = this.pos;
     }
     setNewTopBlock = function (clickedBlockPos) { //this function operates on all instances in the blocks array
-        console.log('setNew');
         for (let i = 0; i<blocks.length; i++) {
             if (blocks[i].pos < clickedBlockPos) { blocks[i].pos++; }
             else if (blocks[i].pos == clickedBlockPos) { blocks[i].pos = 0; }
@@ -15,7 +14,8 @@ class Block {
     }
     updateStyle = function () { //this function operates on all instances of the blocks array
         for (let i = 0; i<blocks.length; i++) {
-            blocks[i].el.style = `order: ${blocks[i].pos};`;
+            let zIndex = (blocks[i].pos==0) ? 1 : 0;
+            blocks[i].el.style = `top: calc(${blocks[i].pos}*5rem + ${blocks[i].pos}*0.5rem); transition: top 1s; z-index: ${zIndex}`;
             blocks[i].el.innerText = blocks[i].pos;
         }
     }
