@@ -4,6 +4,7 @@ class Block {
         this.pos = props.pos;
         this.el.style.top = `calc(${this.pos}*5rem + ${this.pos}*0.5rem)`
         this.el.style.transition = `top 1s`;
+        this.el.style.fontSize = `2rem`;
         this.el.innerText = characters[this.pos];
         this.interval = null;
         this.x = 0;
@@ -58,7 +59,13 @@ class Block {
     }
 }
 
-let characters = "🤠😈👿👹👺🤡💩👻💀☠️👽👾🤖🎃😺👨‍🚀👩‍🚀🤴👸🎅🤶🦸🦸‍♂️🦹🦹‍♂️🧙‍♂️🧙‍♀️🧚🧚‍♂️🧛🧛‍♀️🧜🧜‍♂️🧝‍♂️🧝‍♀️🧞🧞‍♀️ 🧟🧟‍♀️🐶🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐔🦉🦇🐴 🦄🐛🐌🐞🐵🕷🦂🐢🐍🦎🦖🦕🐙🦑🦓🦍🐲⛄️".split("");
+// let characters = "🤠😈👿👹👺🤡💩👻💀☠️".split("");
+let characters = 
+["🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖","🎃","😺","👨‍🚀",
+ "👩‍🚀","🤴","👸","🎅","🤶","🦸","🦸‍♂️","🦹","🦹‍♂️","🧙‍♂️","🧙‍♀️","🧚","🧚‍♂️","🧛","🧛‍♀️","🧜","🧜‍♂️",
+ "🧝‍♂️","🧝‍♀️","🧞","🧞‍♀️"," ","🧟","🧟‍♀️","🐶","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷",
+ "🐸","🐔","🦉","🦇","🐴"," ","🦄","🐛","🐌","🐞","🐵","🕷","🦂","🐢","🐍","🦎","🦖",
+ "🦕","🐙","🦑","🦓","🦍","🐲","⛄️"];
 for (let i = (characters.length-1); i > 0; i--){
     const j = Math.floor(Math.random() * i)
     const temp = characters[i]
@@ -77,4 +84,3 @@ let activeBlock;
 blocks.forEach(clickedBlock=>clickedBlock.el.addEventListener('click',()=>clickedBlock.setNewTopBlock(clickedBlock.pos)));
 blocks.forEach(clickedBlock=>clickedBlock.el.addEventListener('mousedown',()=>clickedBlock.moveRight()));
 window.addEventListener('mouseup',()=>activeBlock.stopMovingRight());
-
