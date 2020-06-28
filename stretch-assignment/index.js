@@ -5,14 +5,19 @@ class Block {
         this.el.style = `order: ${this.pos};`;
         this.el.innerText = this.pos;
     }
-    setNewTopBlock = function (i) { //must be called on ALL blocks, i is the previous index of the new top block
-        if (this.pos < i) { this.pos++; }
-        else if (this.pos == i) { this.pos = 0; }
+    setNewTopBlock = function (clickedBlockPos) { //this function operates on all instances in the blocks array
+        console.log('setNew');
+        for (let i = 0; i<blocks.length; i++) {
+            if (blocks[i].pos < clickedBlockPos) { blocks[i].pos++; }
+            else if (blocks[i].pos == clickedBlockPos) { blocks[i].pos = 0; }
+        }
         this.updateStyle();
     }
-    updateStyle = function () {
-        this.el.style = `order: ${this.pos};`;
-        this.el.innerText = this.pos;
+    updateStyle = function () { //this function operates on all instances of the blocks array
+        for (let i = 0; i<blocks.length; i++) {
+            blocks[i].el.style = `order: ${blocks[i].pos};`;
+            blocks[i].el.innerText = blocks[i].pos;
+        }
     }
 }
 
@@ -27,5 +32,4 @@ function setNewTopBlock() {
     console.log('global_setNew');
 }
 
-// blocks.forEach(clickedBlock=>clickedBlock.el.addEventListener('click',()=>blocks.forEach(block=>block.setNewTopBlock(clickedBlock.pos))));
-// blocks.forEach(clickedBlock=>clickedBlock.el.addEventListener('click',()=>
+blocks.forEach(clickedBlock=>clickedBlock.el.addEventListener('click',()=>clickedBlock.setNewTopBlock(clickedBlock.pos)));
